@@ -12,6 +12,11 @@
 	align-items: flex-end;
 }
 
+.round:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
 .material-symbols-outlined {
 	color: yellow;
 	font-weight: 700;
@@ -50,19 +55,57 @@
 }
 
 main {
+	display: flex;
+	justify-content: space-around;
 	margin-top: 30px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-main div {
+.pokemon-title {
 	display: flex;
 	justify-content: center;
 	background-color: rgb(255, 255, 127);
 	border-bottom: 1px solid black;
 	border-top: 1px solid black;
-	box-shadow: 0px 4px 5px 	grey;
+	box-shadow: 0px 4px 5px grey;
 }
 
 .pokemon-title {
 	font-family: 'VT323', monospace;
 	font-size: 50px;	
+}
+
+/* CSS das box dos pokemons*/
+
+.poke-window {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+	border: 2px solid black;
+	box-shadow: 4px 4px 5px grey;
+}
+
+.poke-window h1 {
+	font-size: 20px;
+}
+
+.poke-image {
+	width: 75px;
+	filter: saturate(200%);
+}
+
+.poke-types {
+	display: flex;
+	gap: 10px;
+}
+
+.poke-image:hover{
+	transform: scale(1.1);
+	cursor: pointer;
 }
