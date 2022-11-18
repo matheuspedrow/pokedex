@@ -56,9 +56,12 @@
 
 main {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
+	flex-wrap: wrap;
 	margin-top: 30px;
-	width: 500px;
+	width: 1200px;
+	gap: 20px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -84,8 +87,8 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 150px;
-	height: 150px;
+	width: 200px;
+	height: 180px;
 	border-radius: 10px;
 	border: 2px solid black;
 	box-shadow: 4px 4px 5px grey;
@@ -108,4 +111,10 @@ main {
 .poke-image:hover{
 	transform: scale(1.1);
 	cursor: pointer;
+}
+
+.pokes {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 25px;
 }
