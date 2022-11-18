@@ -1,9 +1,11 @@
 import { readTypes } from './apiFunctions';
 
 export const mainBox = document.querySelector('.pokes');
-const paginationDiv = document.querySelector('.pagination-button');
 
-const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+export const capitalizeFirstLetter = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
+
+const paginationDiv = document.querySelector('.pagination-button');
 
 export const selectPage = (number) => 
 	document.querySelector(`.button-${number}`).classList.add('page-selected');
