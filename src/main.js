@@ -1,7 +1,7 @@
 import '../styles/main.css';
 import '../styles/types.css';
 import { loadPokemons } from './apiFunctions';
-import { showPages, createPokemonBox } from './domFunctions';
+import { showPages, createPokemonBox, selectPage } from './domFunctions';
 import { searchText } from './searchFunctions';
 
 const totalPokemonsToShow = 300;
@@ -17,4 +17,5 @@ window.onload = async () => {
 	createPokemonBox(pokemonList)
 	showPages(currentPage, totalPages, pokemonList);
 	searchText(pokemonList);
+	selectPage(1);
 }
