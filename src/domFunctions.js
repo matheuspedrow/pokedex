@@ -5,6 +5,12 @@ const paginationDiv = document.querySelector('.pagination-button');
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
+const definePokemonRange = (currentPage) => {
+	const limitItem = 20;
+	if (currentPage === 1) return {min: 1, max: limitItem};
+	return {min: currentPage * limitItem - limitItem + 1, max: currentPage * limitItem};
+};
+
 const createImages = (types) => {
 	const pokeTypes = readTypes(types);
 
@@ -41,16 +47,18 @@ export const createPokemonBox = (arrayOfPokemons, min = 1, max = 20) => {
 };
 
 const definePageRange = (currentPage, totalPages) => {
-	if (currentPage > 5 && currentPage < totalPages - 4)
-    return { min: currentPage - 4, max: currentPage + 5 };
+	if (currentPage > 4 && currentPage < totalPages - 4)
+    return { min: currentPage - 4, max: currentPage + 4 };
   else if (currentPage >= totalPages - 4)
     return { min: totalPages - 9, max: totalPages };
-	return {min: 1, max: 10};
+	if (totalPages < 9) return {min: 1, max: totalPages}; 
+	return {min: 1, max: 9};
 };
 
 const buttonUpdate = (pokeList, min, max, buttonValue, totalPages) => {
 	createPokemonBox(pokeList, min, max);
 	showPages(buttonValue, totalPages, pokeList);
+	document.querySelector(`.button-${buttonValue}`).classList.add('page-selected');
 } 
 
 const createShowPageEvent = (pokeList, totalPages) => {
@@ -62,12 +70,6 @@ const createShowPageEvent = (pokeList, totalPages) => {
 	});
 };
 
-const definePokemonRange = (currentPage) => {
-	const limitItem = 20;
-	if (currentPage === 1) return {min: 1, max: limitItem};
-	return {min: currentPage * limitItem - limitItem + 1, max: currentPage * limitItem};
-};
-
 export const showPages = (currentPage, totalPages, pokeList) => {
 	const { min, max } = definePageRange(currentPage, totalPages);
 	const paginationDiv = document.querySelector('.pagination-button');
@@ -77,7 +79,7 @@ export const showPages = (currentPage, totalPages, pokeList) => {
 	{
 		const divButton = document.createElement('div');
 		divButton.innerHTML = 
-		`<button type="button" class="btn btn-primary page-button">
+		`<button type="button" class="btn btn-primary page-button button-${pageIndex}">
 		 	<i class="fas fa-search"><span>${pageIndex}</span></i>
 		</button>`;
 		paginationDiv.appendChild(divButton);
