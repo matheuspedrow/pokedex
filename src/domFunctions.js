@@ -1,6 +1,7 @@
 import { readTypes } from './apiFunctions';
 
 export const mainBox = document.querySelector('.pokes');
+export const pokeBox = document.querySelector('.selected-pokemon');
 
 export const capitalizeFirstLetter = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
@@ -40,6 +41,30 @@ export const createElement = (name, types, sprites, index) => {
 
 const resetPokemonBox = () => mainBox.innerHTML = '';
 
+export const showPokeInfos = ({ id, name, types, stats }) => {
+	const pokemonInfoBox =
+		`<h3>#${id} ${name}</h3>
+		<img class="poke-image-selected" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png" alt="">
+		<div class="type-show">
+			${createImages(types)}
+		</div>
+		<div class ="status">
+			<p><span>HP</span> <span>${stats[0].base_stat}</span></p>
+			<p><span>Attack</span><span>${stats[1].base_stat}</span></p>
+			<p><span>Defense</span><span>${stats[2].base_stat}</span></p>
+			<p><span>S.Attack</span><span>${stats[3].base_stat}</span></p>
+			<p><span>S.Defense</span><span>${stats[4].base_stat}</span></p>
+			<p><span>Speed</span><span>${stats[5].base_stat}</span></p>
+		</div>`;
+
+	const newPokemonInfoBox = document.createElement('div');
+	newPokemonInfoBox.innerHTML = pokemonInfoBox;
+	pokeBox.innerHTML = '';
+	pokeBox.style.display = 'flex';
+	pokeBox.appendChild(newPokemonInfoBox);
+
+}
+
 export const createPokemonBox = (arrayOfPokemons, min = 0, max = 20) => {
 		resetPokemonBox();
 		for (let index = min; index < max; index ++) {
@@ -50,6 +75,7 @@ export const createPokemonBox = (arrayOfPokemons, min = 0, max = 20) => {
 			const pokemonBox = createElement(name, types, sprites, id);
 			newBox.classList.add('poke-window');
 			newBox.innerHTML = pokemonBox;
+			newBox.addEventListener('click', () => showPokeInfos(arrayOfPokemons[index]))
 			mainBox.appendChild(newBox);
 		}
 };
@@ -64,7 +90,7 @@ const definePageRange = (currentPage, totalPages) => {
 		return {min: 1, max: 9};
 	}
 	if (totalPages === 0) return {min: 1, max: 1}
-	return {min: 1, max: totalPages + 1};
+	return {min: 1, max: totalPages};
 };
 
 const buttonUpdate = (pokeList, min, max, buttonValue, totalPages) => {
