@@ -64,7 +64,7 @@ const definePageRange = (currentPage, totalPages) => {
 		return {min: 1, max: 9};
 	}
 	if (totalPages === 0) return {min: 1, max: 1}
-	return {min: 1, max: totalPages};
+	return {min: 1, max: totalPages + 1};
 };
 
 const buttonUpdate = (pokeList, min, max, buttonValue, totalPages) => {

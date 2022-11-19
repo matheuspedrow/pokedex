@@ -1,5 +1,6 @@
 const searchField = document.querySelector('#search-text');
 const searchType = document.querySelector('.search-type');
+const searchBox = document.querySelector('.gen-search');
 
 
 import {
@@ -10,7 +11,7 @@ import {
   selectPage,
 } from "./domFunctions";
 
-import { types } from './types'
+import { types, generations } from './extras'
 import { readTypes } from './apiFunctions';
 
 const selectType = (event) => {
@@ -20,6 +21,13 @@ const selectType = (event) => {
 	event.target.classList.add('select-type');
 };
 
+const selectGen = (event) => {
+	if (!event.target.classList.contains('gen-icon')) return;
+	if (event.target.classList.contains('select-gen'))
+		return event.target.classList.remove('select-gen');
+	event.target.classList.add('select-gen');
+};
+
 export const createTypesSearch = (arrayOfPokemons) => {
 	types.forEach((type) => {
 		const newType = document.createElement('div');
@@ -27,9 +35,27 @@ export const createTypesSearch = (arrayOfPokemons) => {
 		newType.innerHTML = `<img src="./img/types/${type}.svg" alt="" class="icon ${type}"></img>
 		<span class="tooltiptext">${capitalizeFirstLetter(type)}</span>`;
 		newType.addEventListener('click', selectType)
+		newType.addEventListener('click', () => filterPokemon(arrayOfPokemons))
 		searchType.appendChild(newType);
 	});
 };
+
+const createGenerationSearch = (arrayOfPokemons) => {
+	generations.forEach((type) => {
+		const newType = document.createElement('div');
+		newType.classList.add('tooltips');
+		newType.innerHTML = `<img src="./img/generation/${type}.png" alt="" class="gen-icon ${type}"></img>
+		<span class="tooltiptext">${capitalizeFirstLetter(type)}</span>`;
+		newType.addEventListener('click', selectGen)
+		newType.addEventListener('click', () => filterPokemon(arrayOfPokemons))
+		searchBox.appendChild(newType);
+	});
+};
+
+export const createSearchArea = (arrayOfPokemons) => {
+	createTypesSearch(arrayOfPokemons);
+	createGenerationSearch(arrayOfPokemons);
+}
 
 const filterNotFound = () => {
 	document.querySelector('.pokes').innerHTML = '';
@@ -77,7 +103,7 @@ const filterPokemon = (arrayOfPokemons) => {
 		mainBox.appendChild(newBox);
 	}
 
-	const totalPages = Math.round(pokesToShow.length / 20);
+	const totalPages = Math.ceil(pokesToShow.length / 20);
 	showPages(1, totalPages, pokesToShow);
 	selectPage(1);
 };
