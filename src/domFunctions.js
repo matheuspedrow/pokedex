@@ -21,10 +21,10 @@ const createImages = (types) => {
 	const pokeTypes = readTypes(types);
 
 	if (pokeTypes.length === 1) 
-		return `<img src="./img/types/${pokeTypes}.svg" alt="" class="icon ${pokeTypes}"></img>`;
+		return `<img src="./images/types/${pokeTypes}.svg" alt="" class="icon ${pokeTypes}"></img>`;
 
-	return `<img src="./img/types/${pokeTypes[0]}.svg" alt="" class="icon ${pokeTypes[0]}"></img>
-					<img src="./img/types/${pokeTypes[1]}.svg" alt="" class="icon ${pokeTypes[1]}"></img>`; 
+	return `<img src="./images/types/${pokeTypes[0]}.svg" alt="" class="icon ${pokeTypes[0]}"></img>
+					<img src="./images/types/${pokeTypes[1]}.svg" alt="" class="icon ${pokeTypes[1]}"></img>`; 
 };
 
 export const createElement = (name, types, sprites, index) => {
@@ -43,7 +43,7 @@ const resetPokemonBox = () => mainBox.innerHTML = '';
 
 export const showPokeInfos = ({ id, name, types, stats }) => {
 	const pokemonInfoBox =
-		`<h3>#${id} ${name}</h3>
+		`<h3>#${id} ${capitalizeFirstLetter(name)}</h3>
 		<img class="poke-image-selected" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png" alt="">
 		<div class="type-show">
 			${createImages(types)}

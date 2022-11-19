@@ -1,12 +1,17 @@
 const createArrayWithSize = (size) => Array.from({length: size}, (_, i) => i + 1);
 
 const searchOn = () => {
-	const search = document.querySelector('.search-itens');
+	const search = document.querySelector('.filters-box');
+	search.style.display = 'flex';
+}
+
+const filterOn = () => {
+	const search = document.querySelector('.clean-filter-section');
 	search.style.display = 'flex';
 }
 
 const searchOff = () => {
-	const search = document.querySelector('.search-itens');
+	const search = document.querySelector('.filters-box');
 	search.style.display = 'none';
 }
 
@@ -18,6 +23,7 @@ const loadingOff = () => {
 export const turnOnOptions = () => {
 	loadingOff();
 	searchOn();
+	filterOn();
 }
 
 export const loadPokemons = (numberOfPokemons) => {

@@ -9,11 +9,12 @@ import {
   selectPage,
 } from "./domFunctions";
 import { 
-	searchText, 
-	createSearchArea, 
+	searchText,
+	createSearchArea,
+	cleanFilterButton,
 } from "./searchFunctions";
 
-const totalPokemonsToShow = 649;
+const totalPokemonsToShow = 898;
 let totalPages = Math.ceil(totalPokemonsToShow / 20);
 const currentPage = 1;
 
@@ -26,5 +27,6 @@ window.onload = async () => {
 	createPokemonBox(pokemonList)
 	showPages(currentPage, totalPages, pokemonList);
 	searchText(pokemonList);
-	selectPage(1);
+	selectPage(currentPage);
+	cleanFilterButton(pokemonList);
 }

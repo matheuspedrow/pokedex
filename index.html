@@ -11,19 +11,30 @@
 </head>
 <body>
 	<header class="header-section">
-		<img src="./img/pokedex-icon.png" class = "pokedex-img" alt="">
+		<img src="./images/pokedex-icon.png" class = "pokedex-img" alt="">
 		<h1 class="main-title">Pokedex</h1>
-		<img src="./img/pokeball-icon.png" class = "pokeball-img" alt="">
+		<img src="./images/pokeball-icon.png" class = "pokeball-img" alt="">
 	</header>
-	<section class="search-itens">
-		<div class="mb-3">
-			<label for="exampleFormControlInput1" class="form-label">Procurar</label>
-			<div class="search-area">
-				<input type="text" class="form-control input-search-area" id="search-text" placeholder="Digite um Pokemon">
+	<section class="filters-box">
+		<section class="search-itens">
+			<div class="mb-3">
+				<h4>Nome</h4>
+				<div class="search-area">
+					<input type="text" class="form-control input-search-area" id="search-text" placeholder="Digite um Pokemon">
+				</div>
 			</div>
+			<div>
+				<h4>Tipagem</h4>
+				<div class="search-type"></div>	
+			</div>
+			<div>
+				<h4>Geração</h4>
+				<div class="gen-search"></div>	
+			</div>
+		</section>
+		<div class="clean-filter-section">
+			<button type="button" class="btn btn-primary btn-lg clean-filter-button">Limpar Filtros</button>
 		</div>
-		<div class="search-type"></div>	
-		<div class="gen-search"></div>	
 	</section>
 		<div>
 			<h1 class="pokemon-title">Pokemons</h1>
@@ -37,7 +48,7 @@
 		<div class="pagination-button"></div>
 		<div class="not-found">
 			<h1>Pokemon não encontrado!</h1>
-			<img src="./img/error/not-found.gif" alt="">
+			<img src="./images/error/not-found.gif" alt="">
 		</div>
 		<div class="pokes"></div>
 	</main>
