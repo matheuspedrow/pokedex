@@ -14,7 +14,7 @@ import {
 	cleanFilterButton,
 } from "./searchFunctions";
 
-const totalPokemonsToShow = 649;
+const totalPokemonsToShow = 898;
 let totalPages = Math.ceil(totalPokemonsToShow / 20);
 const currentPage = 1;
 

@@ -1,7 +1,7 @@
 const createArrayWithSize = (size) => Array.from({length: size}, (_, i) => i + 1);
 
 const searchOn = () => {
-	const search = document.querySelector('.search-itens');
+	const search = document.querySelector('.filters-box');
 	search.style.display = 'flex';
 }
 
@@ -11,7 +11,7 @@ const filterOn = () => {
 }
 
 const searchOff = () => {
-	const search = document.querySelector('.search-itens');
+	const search = document.querySelector('.filters-box');
 	search.style.display = 'none';
 }
 

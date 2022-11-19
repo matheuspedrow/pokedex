@@ -33,7 +33,7 @@ export const createTypesSearch = (arrayOfPokemons) => {
 	types.forEach((type) => {
 		const newType = document.createElement('div');
 		newType.classList.add('tooltips');
-		newType.innerHTML = `<img src="./img/types/${type}.svg" alt="" class="icon ${type}"></img>
+		newType.innerHTML = `<img src="./images/types/${type}.svg" alt="" class="icon ${type}"></img>
 		<span class="tooltiptext">${capitalizeFirstLetter(type)}</span>`;
 		newType.addEventListener('click', selectType)
 		newType.addEventListener('click', () => filterPokemon(arrayOfPokemons))
@@ -45,7 +45,7 @@ const createGenerationSearch = (arrayOfPokemons) => {
 	generations.forEach((type) => {
 		const newType = document.createElement('div');
 		newType.classList.add('tooltips');
-		newType.innerHTML = `<img src="./img/generation/${type}.png" alt="" class="gen-icon ${type}"></img>
+		newType.innerHTML = `<img src="./images/generation/${type}.png" alt="" class="gen-icon ${type}"></img>
 		<span class="tooltiptext">${capitalizeFirstLetter(type)}</span>`;
 		newType.addEventListener('click', selectGen)
 		newType.addEventListener('click', () => filterPokemon(arrayOfPokemons))
@@ -86,9 +86,8 @@ const genFilter = (arrayOfPokemons, filteredGen) => {
 			let fromGen = false;
 			filteredGen
 				.forEach((gen) => {
-					const genStart = pokesPerGen[`${gen}start`];
-					const genEnd = pokesPerGen[`${gen}end`];
-					if (id >= genStart && id <= genEnd) fromGen = true;
+					const { start, end } = pokesPerGen[gen];
+					if (id >= start && id <= end) fromGen = true;
 				});
 			return fromGen;
 	});
