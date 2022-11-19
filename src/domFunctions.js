@@ -43,7 +43,7 @@ const resetPokemonBox = () => mainBox.innerHTML = '';
 
 export const showPokeInfos = ({ id, name, types, stats }) => {
 	const pokemonInfoBox =
-		`<h3>#${id} ${name}</h3>
+		`<h3>#${id} ${capitalizeFirstLetter(name)}</h3>
 		<img class="poke-image-selected" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png" alt="">
 		<div class="type-show">
 			${createImages(types)}

@@ -227,3 +227,9 @@ main {
 h3 {
 	margin-top: 20px;
 }
+
+.clean-filter-section {
+	display: none;
+	justify-content: center;
+	margin-bottom: 30px;
+}

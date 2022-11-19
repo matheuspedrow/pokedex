@@ -2,7 +2,6 @@ const searchField = document.querySelector('#search-text');
 const searchType = document.querySelector('.search-type');
 const searchBox = document.querySelector('.gen-search');
 
-
 import {
   capitalizeFirstLetter,
   createElement,
@@ -130,12 +129,25 @@ const filterPokemon = (arrayOfPokemons) => {
 		newBox.addEventListener('click', () => showPokeInfos(arrayOfPokemons[id - 1]))
 		mainBox.appendChild(newBox);
 	}
-	console.log('entrou')
 
 	const totalPages = Math.ceil(filteredPokemonList.length / 20);
 	showPages(1, totalPages, filteredPokemonList);
 	selectPage(1);
 };
+
+const cleanFilter = (arrayOfPokemons) => {
+	const types = document.querySelectorAll('.select-type');
+	const gens = document.querySelectorAll('.select-gen');
+	searchField.value = '';
+	types.forEach((type) => type.classList.remove('select-type'));
+	gens.forEach((type) => type.classList.remove('select-gen'));
+	filterPokemon(arrayOfPokemons);
+};
+
+export const cleanFilterButton = (arrayOfPokemons) => {
+	const button = document.querySelector('.clean-filter-button');
+	button.addEventListener('click', () => cleanFilter(arrayOfPokemons));
+}
 
 export const searchText = (arrayOfPokemons) => 
 	searchField.addEventListener('input',() => filterPokemon(arrayOfPokemons));

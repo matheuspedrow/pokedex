@@ -5,6 +5,11 @@ const searchOn = () => {
 	search.style.display = 'flex';
 }
 
+const filterOn = () => {
+	const search = document.querySelector('.clean-filter-section');
+	search.style.display = 'flex';
+}
+
 const searchOff = () => {
 	const search = document.querySelector('.search-itens');
 	search.style.display = 'none';
@@ -18,6 +23,7 @@ const loadingOff = () => {
 export const turnOnOptions = () => {
 	loadingOff();
 	searchOn();
+	filterOn();
 }
 
 export const loadPokemons = (numberOfPokemons) => {
