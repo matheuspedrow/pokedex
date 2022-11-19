@@ -20,17 +20,24 @@
 			<label for="exampleFormControlInput1" class="form-label">Procurar</label>
 			<div class="search-area">
 				<input type="text" class="form-control input-search-area" id="search-text" placeholder="Digite um Pokemon">
-				<button type="button" class="btn btn-primary">
-					<i class="fas fa-search"><span class="material-symbols-outlined">search</span></i>
-				</button>
 			</div>
 		</div>
+		<div class="search-type"></div>	
+		<div class="gen-search"></div>	
 	</section>
 		<div>
 			<h1 class="pokemon-title">Pokemons</h1>
 		</div>
 	<main>
+		<div class="loading">
+			<h1>Carregando aguarde...</h1>
+			<div class="my-class-1 in-progress loading-box"></div>
+		</div>
 		<div class="pagination-button"></div>
+		<div class="not-found">
+			<h1>Pokemon não encontrado!</h1>
+			<img src="./img/error/not-found.gif" alt="">
+		</div>
 		<div class="pokes"></div>
 	</main>
 	<script type="module" src="./src/main.js"></script>

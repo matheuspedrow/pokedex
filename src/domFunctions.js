@@ -1,9 +1,11 @@
 import { readTypes } from './apiFunctions';
 
 export const mainBox = document.querySelector('.pokes');
-const paginationDiv = document.querySelector('.pagination-button');
 
-const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+export const capitalizeFirstLetter = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
+
+const paginationDiv = document.querySelector('.pagination-button');
 
 export const selectPage = (number) => 
 	document.querySelector(`.button-${number}`).classList.add('page-selected');
@@ -62,7 +64,7 @@ const definePageRange = (currentPage, totalPages) => {
 		return {min: 1, max: 9};
 	}
 	if (totalPages === 0) return {min: 1, max: 1}
-	return {min: 1, max: totalPages};
+	return {min: 1, max: totalPages + 1};
 };
 
 const buttonUpdate = (pokeList, min, max, buttonValue, totalPages) => {
