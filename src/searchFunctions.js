@@ -9,9 +9,11 @@ import {
   mainBox,
   showPages,
   selectPage,
+	showPokeInfos,
+	pokeBox,
 } from "./domFunctions";
 
-import { types, generations } from './extras'
+import { types, generations, pokesPerGen } from './extras'
 import { readTypes } from './apiFunctions';
 
 const selectType = (event) => {
@@ -68,43 +70,70 @@ const hideNotFound = () => {
 	document.querySelector('.pagination-button').style.display = 'flex';
 }
 
-const getFilteredTypes = () => {
-	const typesSelected = document.querySelectorAll('.select-type');
-	let types = []
-	typesSelected.forEach(
-    (element) => (types = [...types, element.classList[1]])
+const filterBy = (filterOption = '.select-type') => {
+	const selectedFilter = document.querySelectorAll(filterOption);
+	let filteredArray = []
+	selectedFilter.forEach(
+    (filter) => (filteredArray = [...filteredArray, filter.classList[1]])
   );
-	return types;
+	return filteredArray;
 };
 
-const filterPokemon = (arrayOfPokemons) => {
-	const searchName = searchField.value;
-	const filteredTypes = getFilteredTypes().toString();
+const genFilter = (arrayOfPokemons, filteredGen) => {
+
+	if (filteredGen.length === 0) return arrayOfPokemons;
+	return arrayOfPokemons
+		.filter(({ id }) => {
+			let fromGen = false;
+			filteredGen
+				.forEach((gen) => {
+					const genStart = pokesPerGen[`${gen}start`];
+					const genEnd = pokesPerGen[`${gen}end`];
+					if (id >= genStart && id <= genEnd) fromGen = true;
+				});
+			return fromGen;
+	});
+};
+
+const initialFilter = (arrayOfPokemons) => {
+	const searchName = searchField.value.toLowerCase();
+	const filteredTypes = filterBy('.select-type').toString();
+	const filteredGen = filterBy('.select-gen');
+	
 	let pokesToShow = arrayOfPokemons.filter(({ name }) => name.includes(searchName));
+	pokesToShow = genFilter(pokesToShow, filteredGen);
+	
 	if (filteredTypes.length !== 0) {
 		pokesToShow = pokesToShow.filter(({ types }) => {
 			const pokeTypes = readTypes(types);
 			return (filteredTypes.includes(pokeTypes[0]) || filteredTypes.includes(pokeTypes[1]));
 		});
 	}
+	return pokesToShow;
+};
 
-	if (pokesToShow.length === 0) return filterNotFound();
+const filterPokemon = (arrayOfPokemons) => {
+	const filteredPokemonList = initialFilter(arrayOfPokemons);
+	pokeBox.style.display = 'none';
+	if (filteredPokemonList.length === 0) return filterNotFound();
 	hideNotFound();
 
-	const maxPokeToShow = pokesToShow.length > 20 ? 20 : pokesToShow.length;
+	const maxPokeToShow = filteredPokemonList.length > 20 ? 20 : filteredPokemonList.length;
 	document.querySelector('.pokes').innerHTML = '';
 
 	for (let index = 0; index < maxPokeToShow; index ++) {
 		const newBox = document.createElement('div');
-		const { name, types, sprites, id } = pokesToShow[index];
+		const { name, types, sprites, id } = filteredPokemonList[index];
 		const pokemonBox = createElement(name, types, sprites, id);
 		newBox.classList.add('poke-window');
 		newBox.innerHTML = pokemonBox;
+		newBox.addEventListener('click', () => showPokeInfos(arrayOfPokemons[id - 1]))
 		mainBox.appendChild(newBox);
 	}
+	console.log('entrou')
 
-	const totalPages = Math.ceil(pokesToShow.length / 20);
-	showPages(1, totalPages, pokesToShow);
+	const totalPages = Math.ceil(filteredPokemonList.length / 20);
+	showPages(1, totalPages, filteredPokemonList);
 	selectPage(1);
 };
 

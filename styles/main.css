@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+.not-found {
+	display: none;
+}
+
 .search-area {
 	display: flex;
 	gap: 30px;
@@ -38,9 +42,10 @@
 
 .search-itens {
 	display: flex;
+	justify-content: center;
 	margin-top: 30px;
 	gap: 100px;
-	margin-left: 40px;
+	margin-right: 110px;
 }
 
 .main-title {
@@ -106,6 +111,7 @@ main {
 	border-radius: 10px;
 	border: 2px solid black;
 	box-shadow: 4px 4px 5px grey;
+	cursor: pointer;
 }
 
 .poke-window h1 {
@@ -166,10 +172,6 @@ main {
 	transform: scale(1.4);
 }
 
-.not-found {
-	display: none;
-}
-
 .gen-search {
 	display: flex;
 	justify-content: center;
@@ -186,7 +188,42 @@ main {
 }
 
 .select-gen {
-	filter: saturate(100%);
-	transform: scale(1.5);
+	filter: saturate(150%);
+	transform: scale(1.7);
 	cursor: pointer;
+}
+
+.selected-pokemon {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 3px solid black;
+	box-shadow: 5px 5px 20px 	black;
+	width: 400px;
+	height: 520px;
+	gap: 20px;
+	margin-bottom: 20px;
+}
+
+.poke-image-selected {
+	width: 150px;
+	filter: saturate(200%);	
+}
+
+.status {
+	width: 200px;
+}
+.status p {
+	display: flex;
+	justify-content: space-between;
+}
+
+.type-show {
+	margin-left: 40px;
+	margin-bottom: 20px;
+}
+
+h3 {
+	margin-top: 20px;
 }
